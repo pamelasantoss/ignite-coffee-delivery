@@ -8,7 +8,7 @@ function App() {
       <GlobalStyle />
       <h1>Ignite Coffee Delivery</h1>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

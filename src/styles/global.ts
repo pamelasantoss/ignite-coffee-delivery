@@ -27,4 +27,4 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "Poetsen One", sans-serif;
     font-weight: 700;
   }
-`
+`;
