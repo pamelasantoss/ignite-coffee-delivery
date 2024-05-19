@@ -32,25 +32,25 @@ export function Home() {
             <ul>
               <li>
                 <IconCircle bgColor="orange">
-                  <ShoppingCart size={20} color="#fff" weight="fill" />
+                  <ShoppingCart size={20} weight="fill" />
                 </IconCircle>
                 Compra simples e segura
               </li>
               <li>
                 <IconCircle bgColor="gray">
-                  <Package size={20} color="#fff" weight="fill" />
+                  <Package size={20} weight="fill" />
                 </IconCircle>
                 Embalagem mantém o café intacto
               </li>
               <li>
                 <IconCircle bgColor="yellow">
-                  <Timer size={20} color="#fff" weight="fill" />
+                  <Timer size={20} weight="fill" />
                 </IconCircle>
                 Entrega rápida e rastreada
               </li>
               <li>
                 <IconCircle bgColor="purple">
-                  <Coffee size={20} color="#fff" weight="fill" />
+                  <Coffee size={20} weight="fill" />
                 </IconCircle>
                 O café chega fresquinho até você
               </li>

@@ -1,4 +1,5 @@
 import { formatReal } from "../../helpers/formatReal";
+import { QuantityAction } from "../QuantityAction";
 import {
   ActionContainer,
   ImageContainer,
@@ -37,7 +38,10 @@ export function ProductCard({ image, name, description, tags, price }: ProductPr
         <PriceContainer>
           <p><span>R$</span>{formatReal(price)}</p>
         </PriceContainer>
-        <div id="quantity"></div>
+
+        <div id="quantity">
+          <QuantityAction />
+        </div>
       </ActionContainer>
     </ProductContainer>
   );

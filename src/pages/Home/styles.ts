@@ -89,6 +89,10 @@ export const IconCircle = styled.div<IconCircleProps>`
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme[BG_ICON_COLOR[props.bgColor]]};
+
+  svg {
+    fill: ${(props) => props.theme.white};
+  }
 `;
 
 export const ProductSection = styled.section`
