@@ -27,12 +27,17 @@ export const QuantityContainer = styled.div`
         fill: ${(props) => props.theme["purple-700"]};
       }
     }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   input {
     width: 20px;
     border: none;
     background: none;
+    pointer-events: none;
     text-align: center;
     font-size: 1rem;
     color: ${(props) => props.theme["brown-900"]};
