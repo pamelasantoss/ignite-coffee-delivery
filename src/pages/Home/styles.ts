@@ -68,10 +68,6 @@ export const BannerHeroTextContainer = styled.div`
       gap: 0.5rem;
     }
   }
-
-  @media only screen and (max-width: 1280px) {
-
-  }
 `;
 
 const BG_ICON_COLOR = {
@@ -93,4 +89,38 @@ export const IconCircle = styled.div<IconCircleProps>`
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme[BG_ICON_COLOR[props.bgColor]]};
+`;
+
+export const ProductSection = styled.section`
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    color: ${(props) => props.theme["brown-700"]};
+    margin-bottom: 2rem;
+
+    @media only screen and (max-width: 1280px) {
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+export const ProductsList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding-top: 1.5rem;
+
+  @media only screen and (max-width: 1280px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media only screen and (max-width: 920px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;

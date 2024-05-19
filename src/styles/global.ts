@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  h1 {
+  h1, h2, h3 {
     font-family: "Poetsen One", sans-serif;
     font-weight: 700;
   }
