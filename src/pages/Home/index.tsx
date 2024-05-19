@@ -1,30 +1,57 @@
 import {
-  BannerHeroImageContainer,
   BannerHeroTextContainer,
-  HomeContainer
+  HomeContainer,
+  HomeSection,
+  IconCircle
 } from "./styles";
 
 import bannerHero from "../../assets/banner-coffee-delivery.png";
+import {
+  Coffee,
+  Package,
+  ShoppingCart,
+  Timer
+} from "@phosphor-icons/react";
 
 export function Home() {
   return (
-    <section id="hero">
+    <HomeSection>
       <HomeContainer>
         <BannerHeroTextContainer>
           <h1>Encontre o café perfeito para qualquer hora do dia</h1>
           <p>Com o Coffee Delivery você recebe seu café onde estiver, a qualquer hora</p>
           <ul>
-            <li>Compra simples e segura</li>
-            <li>Embalagem mantém o café intacto</li>
-            <li>Entrega rápida e rastreada</li>
-            <li>O café chega fresquinho até você</li>
+            <li>
+              <IconCircle bgColor="orange">
+                <ShoppingCart size={20} color="#fff" weight="fill" />
+              </IconCircle>
+              Compra simples e segura
+            </li>
+            <li>
+              <IconCircle bgColor="gray">
+                <Package size={20} color="#fff" weight="fill" />
+              </IconCircle>
+              Embalagem mantém o café intacto
+            </li>
+            <li>
+              <IconCircle bgColor="yellow">
+                <Timer size={20} color="#fff" weight="fill" />
+              </IconCircle>
+              Entrega rápida e rastreada
+            </li>
+            <li>
+              <IconCircle bgColor="purple">
+                <Coffee size={20} color="#fff" weight="fill" />
+              </IconCircle>
+              O café chega fresquinho até você
+            </li>
           </ul>
         </BannerHeroTextContainer>
 
-        <BannerHeroImageContainer>
+        <div id="hero-image">
           <img src={bannerHero} alt="" />
-        </BannerHeroImageContainer>
+        </div>
       </HomeContainer>
-    </section>
+    </HomeSection>
   );
 }
