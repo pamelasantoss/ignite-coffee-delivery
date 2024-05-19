@@ -6,28 +6,35 @@ import {
   TagsList
 } from "./styles";
 
-import expressoTradicional from "../../assets/products/expresso.png";
+type ProductProps = {
+  image: string,
+  name: string,
+  description: string,
+  tags: string[],
+  price: number
+}
 
-export function ProductCard() {
+export function ProductCard({ image, name, description, tags, price }: ProductProps) {
   return (
     <ProductContainer>
       <ImageContainer>
-        <img src={expressoTradicional} alt="Produto - Expresso Tradicional" />
+        <img src={image} alt={`Produto - ${name}`} />
       </ImageContainer>
 
       <TagsList>
         <ul>
-          <li>Tradicional</li>
-          <li>Tradicional</li>
+          {tags.map((tag) => (
+            <li key={tag}>{tag}</li>
+          ))}
         </ul>
       </TagsList>
 
-      <h3>Expresso Tradicional</h3>
-      <p>O tradicional café feito com água quente e grãos moídos</p>
+      <h3>{name}</h3>
+      <p>{description}</p>
 
       <ActionContainer>
         <PriceContainer>
-          <p><span>R$</span>9,90</p>
+          <p><span>R$</span>{price}</p>
         </PriceContainer>
         <div id="quantity"></div>
       </ActionContainer>

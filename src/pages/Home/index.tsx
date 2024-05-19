@@ -17,6 +17,7 @@ import {
 } from "@phosphor-icons/react";
 
 import bannerHero from "../../assets/banner-coffee-delivery.png";
+import { products } from "../../json/products";
 
 export function Home() {
   return (
@@ -65,7 +66,16 @@ export function Home() {
         <Container>
           <h2>Nossos cafés</h2>
           <ProductsList>
-            <ProductCard />
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                image={product.image}
+                name={product.name}
+                description={product.description}
+                tags={product.tags}
+                price={product.price}
+              />
+            ))}
           </ProductsList>
         </Container>
       </ProductSection>
