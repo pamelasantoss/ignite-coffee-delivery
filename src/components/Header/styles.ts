@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BaseButton } from "../../styles/default";
 
 export const HeaderContainer = styled.header`
   padding: 2rem 0;
@@ -8,17 +9,6 @@ export const HeaderContainer = styled.header`
     align-items: center;
     justify-content: space-between;
   }
-`;
-
-const BaseButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 38px;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  padding: 0.5rem;
 `;
 
 export const ActionButtonsContainer = styled.div`

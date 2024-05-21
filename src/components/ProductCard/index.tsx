@@ -1,7 +1,10 @@
+import { ShoppingCart } from "@phosphor-icons/react";
 import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../QuantityAction";
 import {
   ActionContainer,
+  AddToCartContainer,
+  ButtonAddToCart,
   ImageContainer,
   PriceContainer,
   ProductContainer,
@@ -39,9 +42,13 @@ export function ProductCard({ image, name, description, tags, price }: ProductPr
           <p><span>R$</span>{formatReal(price)}</p>
         </PriceContainer>
 
-        <div id="quantity">
+        <AddToCartContainer>
           <QuantityAction />
-        </div>
+
+          <ButtonAddToCart>
+            <ShoppingCart size={20} weight="fill" />
+          </ButtonAddToCart>
+        </AddToCartContainer>
       </ActionContainer>
     </ProductContainer>
   );

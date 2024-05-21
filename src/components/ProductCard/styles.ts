@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BaseButton } from "../../styles/default";
 
 export const ProductContainer = styled.div`
   background-color: ${(props) => props.theme["gray-200"]};
@@ -69,5 +70,20 @@ export const PriceContainer = styled.div`
       font-size: 0.875rem;
       margin-right: 0.25rem;
     }
+  }
+`;
+
+export const AddToCartContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+export const ButtonAddToCart = styled(BaseButton)`
+  width: 38px;
+  background-color: ${(props) => props.theme["purple-700"]};
+  color: ${(props) => props.theme.white};
+
+  &:hover {
+    background-color: ${(props) => props.theme["purple-500"]};
   }
 `;
