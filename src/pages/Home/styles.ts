@@ -6,13 +6,13 @@ export const HomeSection = styled.section`
 `;
 
 export const HomeContainer = styled.div`
-  max-width: 1120px;
+  max-width: ${(props) => props.theme["max-width"]};
   margin: 0 auto;
   padding: 5.125rem 0;
   display: flex;
   justify-content: space-between;
 
-  @media only screen and (max-width: 1120px) {
+  @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
     padding: 1rem;
     flex-direction: column;
 
@@ -30,7 +30,7 @@ export const BannerHeroTextContainer = styled.div`
     color: ${(props) => props.theme["brown-900"]};
     margin-bottom: 2rem;
 
-    @media only screen and (max-width: 1120px) {
+    @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
       font-size: 2rem;
       margin-bottom: 1.5rem;
     }
@@ -41,7 +41,7 @@ export const BannerHeroTextContainer = styled.div`
     line-height: 1.5rem;
     color: ${(props) => props.theme["brown-900"]};
 
-    @media only screen and (max-width: 1120px) {
+    @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
       font-size: 1rem;
     }
   }
@@ -60,7 +60,7 @@ export const BannerHeroTextContainer = styled.div`
       gap: 1.25rem;
     }
 
-    @media only screen and (max-width: 1120px) {
+    @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
       margin-top: 2rem;
       margin-bottom: 2rem;
       display: flex;
@@ -104,7 +104,7 @@ export const ProductSection = styled.section`
     color: ${(props) => props.theme["brown-700"]};
     margin-bottom: 2rem;
 
-    @media only screen and (max-width: 1120px) {
+    @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
       font-size: 1.5rem;
     }
   }
@@ -116,7 +116,7 @@ export const ProductsList = styled.div`
   gap: 2rem;
   padding-top: 1.5rem;
 
-  @media only screen and (max-width: 1120px) {
+  @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 

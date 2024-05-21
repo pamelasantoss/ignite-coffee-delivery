@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 1120px;
+  max-width: ${(props) => props.theme["max-width"]};
   margin: 0 auto;
 
-  @media only screen and (max-width: 1120px) {
+  @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
     padding: 0 1rem;
   }
 `;

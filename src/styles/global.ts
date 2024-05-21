@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 1rem;
 
-    @media only screen and (max-width: 1120px) {
+    @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
       font-size: 75%;
     }
   }
