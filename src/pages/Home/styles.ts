@@ -70,31 +70,6 @@ export const BannerHeroTextContainer = styled.div`
   }
 `;
 
-const BG_ICON_COLOR = {
-  orange: "orange-300",
-  gray: "brown-500",
-  yellow: "yellow-700",
-  purple: "purple-500"
-} as const;
-
-interface IconCircleProps {
-  bgColor: keyof typeof BG_ICON_COLOR
-}
-
-export const IconCircle = styled.div<IconCircleProps>`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: ${(props) => props.theme[BG_ICON_COLOR[props.bgColor]]};
-
-  svg {
-    fill: ${(props) => props.theme.white};
-  }
-`;
-
 export const ProductSection = styled.section`
   padding-top: 1rem;
   padding-bottom: 2rem;

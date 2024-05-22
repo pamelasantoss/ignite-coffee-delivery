@@ -1,10 +1,9 @@
 import { ProductCard } from "../../components/ProductCard";
-import { Container } from "../../styles/default";
+import { Container, IconCircle } from "../../styles/default";
 import {
   BannerHeroTextContainer,
   HomeContainer,
   HomeSection,
-  IconCircle,
   ProductSection,
   ProductsList
 } from "./styles";
