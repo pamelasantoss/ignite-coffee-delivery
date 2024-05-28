@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
-export const QuantityContainer = styled.div`
+export interface QuantityContainerProps {
+  componentHeight?: number
+}
+
+export const QuantityContainer = styled.div<QuantityContainerProps>`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 72px;
-  height: 38px;
+  height: ${(props) => props.componentHeight}px;
   padding: 0.5rem;
   background-color: ${(props) => props.theme["gray-400"]};
   border-radius: 6px;

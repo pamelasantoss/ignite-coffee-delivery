@@ -181,3 +181,88 @@ export const PaymentButton = styled(BaseButton)`
     border: 1px solid ${(props) => props.theme["purple-500"]};
   }
 `;
+
+export const CheckoutProductList = styled.div`
+  .productCard {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid ${(props) => props.theme["gray-400"]};
+    padding: 1.5rem 0;
+
+    .image {
+      img {
+        max-height: 64px;
+      }
+    }
+
+    .info {
+      flex: 1;
+      padding: 0 1rem;
+
+      p {
+        color: ${(props) => props.theme["brown-700"]};
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .price {
+      p {
+        font-weight: 700;
+      }
+    }
+  }
+`;
+
+export const CheckoutSummaryContent = styled.div`
+  ul {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    li {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p.subtitle {
+        font-size: 0.875rem;
+      }
+
+      &:last-child {
+        p {
+          font-weight: 700;
+          font-size: 1.25rem;
+          color: ${(props) => props.theme["brown-700"]}
+        }
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 0.5rem;
+    transition: .2s;
+    background-color: ${(props) => props.theme["yellow-700"]};
+    color: ${(props) => props.theme.white};
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+
+    &:hover {
+      background-color: ${(props) => props.theme["orange-300"]};
+    }
+  }
+`;

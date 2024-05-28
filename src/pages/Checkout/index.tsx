@@ -9,12 +9,17 @@ import {
   CheckoutContainer,
   CheckoutInfoContainer,
   CheckoutLeftContainer,
+  CheckoutProductList,
   CheckoutRightContainer,
+  CheckoutSummaryContent,
   CheckoutTitleSection,
   FormCheckoutSection,
   PaymentButton,
   PaymentButtonsSection
 } from "./styles";
+import { products } from "../../json/products";
+import { formatReal } from "../../helpers/formatReal";
+import { QuantityAction } from "../../components/QuantityAction";
 
 export function Checkout() {
   return (
@@ -90,7 +95,43 @@ export function Checkout() {
         <h2>Cafés selecionados</h2>
 
         <CheckoutInfoContainer>
-          Resumo do pedido
+          <CheckoutProductList>
+            {products.map((item) => (
+              <div className="productCard" key={item.id}>
+                <div className="image">
+                  <img src={item.image} alt={`Produto - ${item.name}`} />
+                </div>
+                <div className="info">
+                  <p>{item.name}</p>
+                  <QuantityAction componentHeight={32} />
+                </div>
+                <div className="price">
+                  <p><span>R$</span>{formatReal(item.price)}</p>
+                </div>
+              </div>
+            ))}
+          </CheckoutProductList>
+
+          <CheckoutSummaryContent>
+            <ul>
+              <li>
+                <p className="subtitle">Total de itens</p>
+                <p className="value">R$ 29,70</p>
+              </li>
+              <li>
+                <p className="subtitle">Entrega</p>
+                <p className="value">R$ 3,50</p>
+              </li>
+              <li>
+                <p className="subtitle">Total</p>
+                <p className="value">R$ 33,20</p>
+              </li>
+            </ul>
+
+            <button type="button">
+              Confirmar pedido
+            </button>
+          </CheckoutSummaryContent>
         </CheckoutInfoContainer>
       </CheckoutRightContainer>
     </CheckoutContainer>

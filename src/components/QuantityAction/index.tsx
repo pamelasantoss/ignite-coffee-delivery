@@ -1,5 +1,5 @@
 import { Minus, Plus } from "@phosphor-icons/react";
-import { QuantityContainer } from "./styles";
+import { QuantityContainer, QuantityContainerProps } from "./styles";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,7 @@ const quantitySchema = z.object({
     .max(10)
 });
 
-export function QuantityAction() {
+export function QuantityAction({ componentHeight = 38 }: QuantityContainerProps) {
   const { register, watch, getValues, setValue } = useForm({
     resolver: zodResolver(quantitySchema),
     defaultValues: {
@@ -32,7 +32,7 @@ export function QuantityAction() {
   }
 
   return (
-    <QuantityContainer>
+    <QuantityContainer componentHeight={componentHeight}>
       <button
         type="button"
         onClick={handleRemoveItem}
