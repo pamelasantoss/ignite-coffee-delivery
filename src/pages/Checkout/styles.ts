@@ -21,7 +21,60 @@ export const CheckoutContainer = styled.div`
   }
 `;
 
+export const CheckoutEmptyContainer = styled.div`
+  padding: 1.5rem 0;
+
+  h1 {
+    font-size: 2rem;
+    color: ${(props) => props.theme["orange-300"]};
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    color: ${(props) => props.theme["brown-900"]};
+
+    @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
+      font-size: 1rem;
+    }
+  }
+
+  a {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 0.5rem;
+    transition: .2s;
+    background-color: ${(props) => props.theme["yellow-700"]};
+    color: ${(props) => props.theme.white};
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    text-decoration: none;
+
+    &:hover {
+      background-color: ${(props) => props.theme["orange-300"]};
+    }
+
+    @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
+    padding: 1rem;
+  }
+`;
+
 export const CheckoutLeftContainer = styled.div`
+  display: none;
   flex: 1;
 
   @media only screen and (max-width: ${(props) => props.theme["max-width"]}) {
@@ -31,6 +84,7 @@ export const CheckoutLeftContainer = styled.div`
 `;
 
 export const CheckoutRightContainer = styled.div`
+  display: none;
   width: 40%;
   margin-left: 2rem;
 
@@ -216,7 +270,7 @@ export const CheckoutProductList = styled.div`
 
 export const CheckoutSummaryContent = styled.div`
   ul {
-    padding: 0;
+    padding: 1.5rem 0 0;
     margin: 0;
     width: 100%;
     display: flex;

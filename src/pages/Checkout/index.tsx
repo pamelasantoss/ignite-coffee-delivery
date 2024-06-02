@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import {
   CheckoutContainer,
+  CheckoutEmptyContainer,
   CheckoutInfoContainer,
   CheckoutLeftContainer,
   CheckoutProductList,
@@ -20,6 +21,7 @@ import {
 import { products } from "../../json/products";
 import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../../components/QuantityAction";
+import { Link } from "react-router-dom";
 
 export function Checkout() {
   return (
@@ -134,6 +136,12 @@ export function Checkout() {
           </CheckoutSummaryContent>
         </CheckoutInfoContainer>
       </CheckoutRightContainer>
+
+      <CheckoutEmptyContainer>
+        <h1>Seu carrinho está vazio</h1>
+        <p>Adicione produtos no seu carrinho para seguir com a compra</p>
+        <Link to="/" title="Home" role="button">Continuar comprando</Link>
+      </CheckoutEmptyContainer>
     </CheckoutContainer>
   );
 } 

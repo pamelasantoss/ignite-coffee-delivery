@@ -19,6 +19,11 @@ export const BaseButton = styled.button`
   border-radius: 6px;
   padding: 0.5rem;
   transition: .2s;
+  
+  &:focus {
+    outline: 1px solid transparent;
+    box-shadow: none;
+  }
 `;
 
 const BG_ICON_COLOR = {
