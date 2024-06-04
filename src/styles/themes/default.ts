@@ -2,6 +2,7 @@ export const defaultTheme = {
   "max-width": "1120px",
   
   white: "#FFF",
+  red: "#b20707",
 
   "gray-100": "#FAFAFA",
   "gray-200": "#F3F2F2",

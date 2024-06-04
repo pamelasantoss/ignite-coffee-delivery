@@ -14,7 +14,6 @@ import {
   CheckoutRightContainer,
   CheckoutSummaryContent,
   CheckoutTitleSection,
-  FormCheckoutSection,
   PaymentButton,
   PaymentButtonsSection
 } from "./styles";
@@ -22,6 +21,7 @@ import { products } from "../../json/products";
 import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../../components/QuantityAction";
 import { Link } from "react-router-dom";
+import { AddressForm } from "../../components/AddressForm";
 
 export function Checkout() {
   return (
@@ -38,31 +38,7 @@ export function Checkout() {
             </p>
           </CheckoutTitleSection>
 
-          <FormCheckoutSection>
-            <form>
-              <div className="fieldset">
-                <input type="text" placeholder="CEP" className="input-cep" />
-              </div>
-
-              <div className="fieldset">
-                <input type="text" placeholder="Rua" />
-              </div>
-
-              <div className="fieldset">
-                <input type="number" placeholder="Número" className="input-numero" />
-                <div className="fieldset-complemento">
-                  <input type="text" placeholder="Complemento" />
-                  <span>Opcional</span>
-                </div>
-              </div>
-
-              <div className="fieldset">
-                <input type="text" placeholder="Bairro" className="input-bairro" />
-                <input type="text" placeholder="Cidade" />
-                <input type="text" placeholder="UF" className="input-uf" />
-              </div>
-            </form>
-          </FormCheckoutSection>
+          <AddressForm />
         </CheckoutInfoContainer>
 
         <CheckoutInfoContainer>
