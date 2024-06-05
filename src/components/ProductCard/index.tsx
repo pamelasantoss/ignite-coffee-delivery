@@ -20,6 +20,11 @@ type ProductProps = {
 }
 
 export function ProductCard({ image, name, description, tags, price }: ProductProps) {
+  function addToCart() {
+    // Ao adicionar um item no carrinho, é esperado as informações do produto
+    console.log("Clicou no botão de adicionar ao carrinho!");
+  }
+
   return (
     <ProductContainer>
       <ImageContainer>
@@ -45,7 +50,7 @@ export function ProductCard({ image, name, description, tags, price }: ProductPr
         <AddToCartContainer>
           <QuantityAction />
 
-          <ButtonAddToCart>
+          <ButtonAddToCart onClick={addToCart}>
             <ShoppingCart size={20} weight="fill" />
           </ButtonAddToCart>
         </AddToCartContainer>

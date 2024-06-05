@@ -6,7 +6,12 @@ interface CartState {
   cart: Cart[]
 }
 
-export function cartReducer(state: CartState, action: unknown) {
-  console.log(action);
-  return state;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function cartReducer(state: CartState, action: any) {
+  switch (action.type) {
+  case "Add_to_Cart":
+    return state;
+  default:
+    return state;
+  }
 }
