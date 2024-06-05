@@ -8,6 +8,13 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    a {
+      &:focus {
+        outline: 1px solid transparent;
+        box-shadow: none;
+      }
+    }
   }
 `;
 
@@ -26,4 +33,21 @@ export const LocationButton = styled(BaseButton)`
 export const CartButton = styled(BaseButton)`
   background-color: ${(props) => props.theme["yellow-300"]};
   color: ${(props) => props.theme["orange-300"]};
+  position: relative;
+
+  span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${(props) => props.theme["orange-300"]};
+    color: ${(props) => props.theme.white};
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.75rem;
+    top: -8px;
+    right: -9px;
+  }
 `;

@@ -8,9 +8,13 @@ import {
 
 import coffeeDeliveryLogo from "../../assets/coffee-delivery-logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 export function Header() {
+  const { cart } = useContext(CartContext);
+
   const navigate = useNavigate();
 
   function handleCheckoutButton() {
@@ -21,7 +25,9 @@ export function Header() {
     <HeaderContainer>
       <Container>
         <div className="row">
-          <img src={coffeeDeliveryLogo} alt="Coffee Delivery" />
+          <Link to="/">
+            <img src={coffeeDeliveryLogo} alt="Coffee Delivery" />
+          </Link>
 
           <ActionButtonsContainer>
             <LocationButton>
@@ -30,6 +36,7 @@ export function Header() {
             </LocationButton>
             
             <CartButton type="button" onClick={handleCheckoutButton}>
+              {cart.length > 0 && <span>{cart.length}</span>}
               <ShoppingCart size={20} weight="fill" />
             </CartButton>
           </ActionButtonsContainer>
