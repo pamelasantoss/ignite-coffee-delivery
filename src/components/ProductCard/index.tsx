@@ -19,10 +19,19 @@ type ProductProps = {
   name: string,
   description: string,
   tags: string[],
-  price: number
+  price: number,
+  quantity: number,
 }
 
-export function ProductCard({ id, image, name, description, tags, price }: ProductProps) {
+export function ProductCard({
+  id,
+  image,
+  name,
+  description,
+  tags,
+  price,
+  quantity
+}: ProductProps) {
   const { addProductToCart } = useContext(CartContext);
 
   function addToCart() {
@@ -52,7 +61,7 @@ export function ProductCard({ id, image, name, description, tags, price }: Produ
         </PriceContainer>
 
         <AddToCartContainer>
-          <QuantityAction />
+          <QuantityAction productQuantity={quantity} />
 
           <ButtonAddToCart onClick={addToCart}>
             <ShoppingCart size={20} weight="fill" />

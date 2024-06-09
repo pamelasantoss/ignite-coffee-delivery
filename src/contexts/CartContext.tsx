@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useReducer } from "react";
 import { Cart, cartReducer } from "../reducers/cart/reducer";
 import { products } from "../json/products";
-import { addProductToCartAction } from "../reducers/cart/actions";
+import { addProductToCartAction, sumProductToCartAction } from "../reducers/cart/actions";
 
 interface CartContextType {
   cart: Cart[],
@@ -27,12 +27,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     const filterProducts = products.find(item => item.id === id);
     const productAlreadyAddedToCart = cart.find(product => product.id === id);
 
-    if (productAlreadyAddedToCart) {
-      console.log("Produto já foi adicionado, então soma +1 ", filterProducts);
-    }
-
-    if (!productAlreadyAddedToCart && filterProducts !== undefined) {
-      dispatch(addProductToCartAction(filterProducts));
+    if (filterProducts) {
+      if (productAlreadyAddedToCart) {
+        dispatch(sumProductToCartAction(filterProducts));
+      } else {
+        dispatch(addProductToCartAction(filterProducts));
+      }
     }
   }
 

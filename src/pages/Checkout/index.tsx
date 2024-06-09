@@ -17,7 +17,6 @@ import {
   PaymentButton,
   PaymentButtonsSection
 } from "./styles";
-import { products } from "../../json/products";
 import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../../components/QuantityAction";
 import { Link } from "react-router-dom";
@@ -40,7 +39,7 @@ export function Checkout() {
                 <MapPinLine size={20} />
                 <p>
                   <span>Endereço de entrega</span>
-              Informe o endereço onde deseja receber seu pedido
+                  Informe o endereço onde deseja receber seu pedido
                 </p>
               </CheckoutTitleSection>
 
@@ -52,24 +51,24 @@ export function Checkout() {
                 <CurrencyDollar size={20} />
                 <p>
                   <span>Pagamento</span>
-              O pagamento é feito na entrega. Escolha a forma que deseja pagar
+                  O pagamento é feito na entrega. Escolha a forma que deseja pagar
                 </p>
               </CheckoutTitleSection>
 
               <PaymentButtonsSection>
                 <PaymentButton>
                   <CreditCard size={16} />
-              Cartão de crédito
+                  Cartão de crédito
                 </PaymentButton>
 
                 <PaymentButton>
                   <Bank size={16} />
-              Cartão de débito
+                  Cartão de débito
                 </PaymentButton>
 
                 <PaymentButton className="active">
                   <Money size={16} />
-              Dinheiro
+                  Dinheiro
                 </PaymentButton>
               </PaymentButtonsSection>
             </CheckoutInfoContainer>
@@ -80,14 +79,17 @@ export function Checkout() {
 
             <CheckoutInfoContainer>
               <CheckoutProductList>
-                {products.map((item) => (
+                {cart.map((item) => (
                   <div className="productCard" key={item.id}>
                     <div className="image">
                       <img src={item.image} alt={`Produto - ${item.name}`} />
                     </div>
                     <div className="info">
                       <p>{item.name}</p>
-                      <QuantityAction componentHeight={32} />
+                      <QuantityAction
+                        productQuantity={item.quantity}
+                        componentHeight={32}
+                      />
                     </div>
                     <div className="price">
                       <p><span>R$</span>{formatReal(item.price)}</p>

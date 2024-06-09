@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export interface QuantityContainerProps {
+interface QuantityContainerProps {
   componentHeight?: number
 }
 

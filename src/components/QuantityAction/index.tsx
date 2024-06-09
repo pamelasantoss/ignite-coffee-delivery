@@ -1,8 +1,16 @@
 import { Minus, Plus } from "@phosphor-icons/react";
-import { QuantityContainer, QuantityContainerProps } from "./styles";
+import { QuantityContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+interface QuantityContainerProps {
+  componentHeight?: number
+}
+
+interface QuantityContainerProps {
+  productQuantity: number
+}
 
 const quantitySchema = z.object({
   quantity: z.coerce
@@ -11,11 +19,13 @@ const quantitySchema = z.object({
     .max(10)
 });
 
-export function QuantityAction({ componentHeight = 38 }: QuantityContainerProps) {
+export function QuantityAction(
+  { componentHeight = 38, productQuantity }: QuantityContainerProps
+) {
   const { register, watch, getValues, setValue } = useForm({
     resolver: zodResolver(quantitySchema),
     defaultValues: {
-      quantity: 1
+      quantity: productQuantity
     }
   });
 

@@ -74,6 +74,7 @@ export function Home() {
                 description={product.description}
                 tags={product.tags}
                 price={product.price}
+                quantity={product.quantity}
               />
             ))}
           </ProductsList>
