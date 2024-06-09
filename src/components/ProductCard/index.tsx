@@ -10,8 +10,11 @@ import {
   ProductContainer,
   TagsList
 } from "./styles";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 type ProductProps = {
+  id: number,
   image: string,
   name: string,
   description: string,
@@ -19,10 +22,11 @@ type ProductProps = {
   price: number
 }
 
-export function ProductCard({ image, name, description, tags, price }: ProductProps) {
+export function ProductCard({ id, image, name, description, tags, price }: ProductProps) {
+  const { addProductToCart } = useContext(CartContext);
+
   function addToCart() {
-    // Ao adicionar um item no carrinho, é esperado as informações do produto
-    console.log("Clicou no botão de adicionar ao carrinho!");
+    addProductToCart(id);
   }
 
   return (

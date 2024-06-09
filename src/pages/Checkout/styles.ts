@@ -22,7 +22,6 @@ export const CheckoutContainer = styled.div`
 `;
 
 export const CheckoutEmptyContainer = styled.div`
-  display: none;
   padding: 1.5rem 0;
 
   h1 {
