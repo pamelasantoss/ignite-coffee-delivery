@@ -12,7 +12,8 @@ export interface Cart {
 }
 
 interface CartState {
-  cart: Cart[]
+  cart: Cart[],
+  productList: Cart[]
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,17 +25,24 @@ export function cartReducer(state: CartState, action: any) {
     });
   case ActionTypes.SUM_TO_CART:
     return produce(state, (draft) => {
-      const productList = draft.cart.findIndex(
+      const currentProductList = draft.cart.findIndex(
         product => product.id === action.payload.id
       );
-      draft.cart[productList].quantity += 1;
+      draft.cart[currentProductList].quantity += 1;
+    });
+  case ActionTypes.UPDATE_QUANTITY:
+    return produce(state, (draft) => {
+      const currentProductList = draft.productList.findIndex(
+        product => product.id === action.payload.productId
+      );
+      draft.productList[currentProductList].quantity = action.payload.quantity;
     });
   case ActionTypes.REMOVE_TO_CART:
     return produce(state, (draft) => {
-      const productList = draft.cart.findIndex(
+      const currentProductList = draft.cart.findIndex(
         product => product.id === action.payload.id
       );
-      draft.cart[productList].quantity -= 1;
+      draft.cart[currentProductList].quantity -= 1;
     });
   default:
     return state;

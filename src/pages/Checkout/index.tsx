@@ -87,6 +87,7 @@ export function Checkout() {
                     <div className="info">
                       <p>{item.name}</p>
                       <QuantityAction
+                        productId={item.id}
                         productQuantity={item.quantity}
                         componentHeight={32}
                       />
@@ -115,7 +116,7 @@ export function Checkout() {
                 </ul>
 
                 <button type="button">
-              Confirmar pedido
+                  Confirmar pedido
                 </button>
               </CheckoutSummaryContent>
             </CheckoutInfoContainer>

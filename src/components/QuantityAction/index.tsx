@@ -3,12 +3,15 @@ import { QuantityContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 interface QuantityContainerProps {
   componentHeight?: number
 }
 
 interface QuantityContainerProps {
+  productId: number,
   productQuantity: number
 }
 
@@ -20,8 +23,9 @@ const quantitySchema = z.object({
 });
 
 export function QuantityAction(
-  { componentHeight = 38, productQuantity }: QuantityContainerProps
+  { componentHeight = 38, productId, productQuantity }: QuantityContainerProps
 ) {
+  const { updateProductQuantity } = useContext(CartContext);
   const { register, watch, getValues, setValue } = useForm({
     resolver: zodResolver(quantitySchema),
     defaultValues: {
@@ -34,11 +38,13 @@ export function QuantityAction(
   function handleRemoveItem() {
     const quantity = Number(getValues("quantity"));
     setValue("quantity", quantity - 1);
+    updateProductQuantity(productId, quantity - 1);
   }
 
   function handleAddItem() {
     const quantity = Number(getValues("quantity"));
     setValue("quantity", quantity + 1);
+    updateProductQuantity(productId, quantity + 1);
   }
 
   return (

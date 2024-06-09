@@ -61,7 +61,10 @@ export function ProductCard({
         </PriceContainer>
 
         <AddToCartContainer>
-          <QuantityAction productQuantity={quantity} />
+          <QuantityAction
+            productId={id}
+            productQuantity={quantity}
+          />
 
           <ButtonAddToCart onClick={addToCart}>
             <ShoppingCart size={20} weight="fill" />
