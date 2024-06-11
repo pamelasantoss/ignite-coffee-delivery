@@ -3,7 +3,8 @@ import {
   CreditCard,
   CurrencyDollar,
   MapPinLine,
-  Money
+  Money,
+  Trash
 } from "@phosphor-icons/react";
 import {
   CheckoutContainer,
@@ -15,7 +16,8 @@ import {
   CheckoutSummaryContent,
   CheckoutTitleSection,
   PaymentButton,
-  PaymentButtonsSection
+  PaymentButtonsSection,
+  RemoveProductButton
 } from "./styles";
 import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../../components/QuantityAction";
@@ -25,7 +27,11 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 
 export function Checkout() {
-  const { cart } = useContext(CartContext);
+  const { cart, removeProductFromCart } = useContext(CartContext);
+
+  function removeFromCart(id: number) {
+    removeProductFromCart(id);
+  }
 
   return (
     <CheckoutContainer>
@@ -86,11 +92,20 @@ export function Checkout() {
                     </div>
                     <div className="info">
                       <p>{item.name}</p>
-                      <QuantityAction
-                        productId={item.id}
-                        productQuantity={item.quantity}
-                        componentHeight={32}
-                      />
+                      <div className="actions">
+                        <QuantityAction
+                          productId={item.id}
+                          productQuantity={item.quantity}
+                          componentHeight={32}
+                        />
+                        <RemoveProductButton
+                          type="button"
+                          onClick={() => removeFromCart(item.id)}
+                        >
+                          <Trash size={16} />
+                          Remover
+                        </RemoveProductButton>
+                      </div>
                     </div>
                     <div className="price">
                       <p><span>R$</span>{formatReal(item.price)}</p>

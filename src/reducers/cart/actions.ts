@@ -21,10 +21,12 @@ export function sumProductToCartAction(productToAdd: Cart) {
   };
 }
 
-export function removeProductFromCartAction(productToRemove: Cart) {
+export function removeProductFromCartAction(productId: number) {
   return {
     type: ActionTypes.REMOVE_TO_CART,
-    payload: productToRemove
+    payload: {
+      productId: productId,
+    }
   };
 }
 

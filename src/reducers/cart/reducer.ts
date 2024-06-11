@@ -39,10 +39,12 @@ export function cartReducer(state: CartState, action: any) {
     });
   case ActionTypes.REMOVE_TO_CART:
     return produce(state, (draft) => {
-      const currentProductList = draft.cart.findIndex(
-        product => product.id === action.payload.id
+      const indexToRemove = draft.cart.findIndex(
+        product => product.id === action.payload.productId
       );
-      draft.cart[currentProductList].quantity -= 1;
+      if (indexToRemove !== -1) {
+        draft.cart.splice(indexToRemove, 1);
+      }
     });
   default:
     return state;

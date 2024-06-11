@@ -3,6 +3,7 @@ import { Cart, cartReducer } from "../reducers/cart/reducer";
 import { products } from "../json/products";
 import {
   addProductToCartAction,
+  removeProductFromCartAction,
   sumProductToCartAction,
   updateProductQuantityAction
 } from "../reducers/cart/actions";
@@ -11,7 +12,8 @@ interface CartContextType {
   cart: Cart[],
   productList: Cart[],
   addProductToCart: (id: number) => void,
-  updateProductQuantity: (productId: number, quantity: number) => void
+  updateProductQuantity: (productId: number, quantity: number) => void,
+  removeProductFromCart: (id: number) => void,
 }
 
 interface CartContextProviderProps {
@@ -47,12 +49,17 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(updateProductQuantityAction(productId, quantity));
   }
 
+  function removeProductFromCart(productId: number) {
+    dispatch(removeProductFromCartAction(productId));
+  }
+
   return (
     <CartContext.Provider value={{
       cart,
       productList,
       addProductToCart,
-      updateProductQuantity
+      updateProductQuantity,
+      removeProductFromCart
     }}>
       {children}
     </CartContext.Provider>
