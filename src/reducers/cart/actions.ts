@@ -1,4 +1,4 @@
-import { Cart } from "./reducer";
+import { Product } from "./reducer";
 
 export enum ActionTypes {
   ADD_TO_CART = "ADD_TO_CART",
@@ -7,14 +7,14 @@ export enum ActionTypes {
   UPDATE_QUANTITY = "UPDATE_QUANTITY"
 }
 
-export function addProductToCartAction(productToAdd: Cart) {
+export function addProductToCartAction(productToAdd: Product) {
   return {
     type: ActionTypes.ADD_TO_CART,
     payload: productToAdd
   };
 }
 
-export function sumProductToCartAction(productToAdd: Cart) {
+export function sumProductToCartAction(productToAdd: Product) {
   return {
     type: ActionTypes.SUM_TO_CART,
     payload: productToAdd

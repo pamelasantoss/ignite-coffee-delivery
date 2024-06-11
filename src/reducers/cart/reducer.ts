@@ -1,7 +1,7 @@
 import { produce } from "immer";
 import { ActionTypes } from "./actions";
 
-export interface Cart {
+export interface Product {
   id: number,
   image: string,
   name: string,
@@ -12,8 +12,8 @@ export interface Cart {
 }
 
 interface CartState {
-  cart: Cart[],
-  productList: Cart[]
+  cart: Product[],
+  productList: Product[]
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

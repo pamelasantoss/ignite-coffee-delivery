@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useReducer } from "react";
-import { Cart, cartReducer } from "../reducers/cart/reducer";
+import { Product, cartReducer } from "../reducers/cart/reducer";
 import { products } from "../json/products";
 import {
   addProductToCartAction,
@@ -9,8 +9,8 @@ import {
 } from "../reducers/cart/actions";
 
 interface CartContextType {
-  cart: Cart[],
-  productList: Cart[],
+  cart: Product[],
+  productList: Product[],
   addProductToCart: (id: number) => void,
   updateProductQuantity: (productId: number, quantity: number) => void,
   removeProductFromCart: (id: number) => void,
