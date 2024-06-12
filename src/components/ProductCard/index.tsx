@@ -10,7 +10,7 @@ import {
   ProductContainer,
   TagsList
 } from "./styles";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
 
 type ProductProps = {
@@ -33,9 +33,11 @@ export function ProductCard({
   quantity
 }: ProductProps) {
   const { addProductToCart } = useContext(CartContext);
+  const [ isProductAddedToCart, setIsProductAddedToCart ] = useState(false);
 
   function addToCart() {
     addProductToCart(id);
+    setIsProductAddedToCart(true);
   }
 
   return (
@@ -61,14 +63,21 @@ export function ProductCard({
         </PriceContainer>
 
         <AddToCartContainer>
-          <QuantityAction
-            productId={id}
-            productQuantity={quantity}
-          />
+          {isProductAddedToCart ? (
+            <div className="intoCart">Adicionado ao carrinho</div>
+          ) : (
+            <>
+              <QuantityAction
+                productId={id}
+                productQuantity={quantity}
+              />
 
-          <ButtonAddToCart onClick={addToCart}>
-            <ShoppingCart size={20} weight="fill" />
-          </ButtonAddToCart>
+              <ButtonAddToCart onClick={addToCart}>
+                <ShoppingCart size={20} weight="fill" />
+              </ButtonAddToCart>
+            </>
+          )}
+          
         </AddToCartContainer>
       </ActionContainer>
     </ProductContainer>

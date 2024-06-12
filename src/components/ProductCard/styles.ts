@@ -76,6 +76,14 @@ export const PriceContainer = styled.div`
 export const AddToCartContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+
+  .intoCart {
+    padding: 0.5rem;
+    background-color: ${(props) => props.theme["purple-700"]};
+    border-radius: 6px;
+    color: ${(props) => props.theme.white};
+    font-weight: 500;
+  }
 `;
 
 export const ButtonAddToCart = styled(BaseButton)`

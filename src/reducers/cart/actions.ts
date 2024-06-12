@@ -4,7 +4,8 @@ export enum ActionTypes {
   ADD_TO_CART = "ADD_TO_CART",
   SUM_TO_CART = "SUM_TO_CART",
   REMOVE_TO_CART = "REMOVE_TO_CART",
-  UPDATE_QUANTITY = "UPDATE_QUANTITY"
+  UPDATE_QUANTITY = "UPDATE_QUANTITY",
+  UPDATE_PRICE = "UPDATE_PRICE"
 }
 
 export function addProductToCartAction(productToAdd: Product) {
@@ -37,5 +38,12 @@ export function updateProductQuantityAction(productId: number, quantity: number)
       productId: productId,
       quantity: quantity
     }
+  };
+}
+
+export function updatePriceAction(productList: Product[]) {
+  return {
+    type: ActionTypes.UPDATE_PRICE,
+    payload: productList
   };
 }

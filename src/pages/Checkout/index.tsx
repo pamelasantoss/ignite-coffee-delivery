@@ -27,7 +27,7 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 
 export function Checkout() {
-  const { cart, removeProductFromCart } = useContext(CartContext);
+  const { cart, summary, removeProductFromCart } = useContext(CartContext);
 
   function removeFromCart(id: number) {
     removeProductFromCart(id);
@@ -118,15 +118,15 @@ export function Checkout() {
                 <ul>
                   <li>
                     <p className="subtitle">Total de itens</p>
-                    <p className="value">R$ 29,70</p>
+                    <p className="value">R$ {formatReal(summary.items)}</p>
                   </li>
                   <li>
                     <p className="subtitle">Entrega</p>
-                    <p className="value">R$ 3,50</p>
+                    <p className="value">R$ {formatReal(summary.delivery)}</p>
                   </li>
                   <li>
                     <p className="subtitle">Total</p>
-                    <p className="value">R$ 33,20</p>
+                    <p className="value">R$ {formatReal(summary.total)}</p>
                   </li>
                 </ul>
 
