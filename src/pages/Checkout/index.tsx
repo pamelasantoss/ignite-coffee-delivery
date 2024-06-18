@@ -1,9 +1,6 @@
 import {
-  Bank,
-  CreditCard,
   CurrencyDollar,
   MapPinLine,
-  Money,
   Trash
 } from "@phosphor-icons/react";
 import {
@@ -15,7 +12,6 @@ import {
   CheckoutRightContainer,
   CheckoutSummaryContent,
   CheckoutTitleSection,
-  PaymentButton,
   PaymentButtonsSection,
   RemoveProductButton
 } from "./styles";
@@ -23,14 +19,28 @@ import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../../components/QuantityAction";
 import { Link } from "react-router-dom";
 import { AddressForm } from "../../components/AddressForm";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { payments } from "../../json/payments";
+import { PaymentButton } from "../../components/PaymentButton";
 
 export function Checkout() {
   const { cart, summary, removeProductFromCart } = useContext(CartContext);
+  const [payment, setPayment] = useState("");
 
   function removeFromCart(id: number) {
     removeProductFromCart(id);
+  }
+
+  function handleSelectionPayment(type: string) {
+    setPayment(type);
+  }
+
+  function sendOrder() {
+    console.log("Enviando o pedido!");
+    console.log("Payment: ", payment);
+    console.log("Cart: ", cart);
+    console.log("Summary: ", summary);
   }
 
   return (
@@ -62,20 +72,15 @@ export function Checkout() {
               </CheckoutTitleSection>
 
               <PaymentButtonsSection>
-                <PaymentButton>
-                  <CreditCard size={16} />
-                  Cartão de crédito
-                </PaymentButton>
-
-                <PaymentButton>
-                  <Bank size={16} />
-                  Cartão de débito
-                </PaymentButton>
-
-                <PaymentButton className="active">
-                  <Money size={16} />
-                  Dinheiro
-                </PaymentButton>
+                {payments.map((item) => (
+                  <PaymentButton
+                    key={item.id}
+                    name={item.type}
+                    icon={item.icon}
+                    isPaymentSelected={payment}
+                    onSelectionPayment={handleSelectionPayment}
+                  />
+                ))}
               </PaymentButtonsSection>
             </CheckoutInfoContainer>
           </CheckoutLeftContainer>
@@ -130,7 +135,7 @@ export function Checkout() {
                   </li>
                 </ul>
 
-                <button type="button">
+                <button type="button" onClick={sendOrder}>
                   Confirmar pedido
                 </button>
               </CheckoutSummaryContent>
