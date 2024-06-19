@@ -1,5 +1,6 @@
 import { produce } from "immer";
 import { ActionTypes } from "./actions";
+import { addressFormData } from "../../components/AddressForm";
 
 export interface Product {
   id: number,
@@ -17,11 +18,20 @@ export interface CheckoutSummary {
   total: number
 }
 
+export interface FullOrder {
+  items: Product[],
+  address: addressFormData,
+  payment: string,
+  prices: CheckoutSummary
+}
+
 interface CartState {
   cart: Product[],
   productList: Product[],
+  address: addressFormData | null,
   paymentMethod: string,
-  summary: CheckoutSummary
+  summary: CheckoutSummary,
+  order: FullOrder | null
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -73,6 +83,10 @@ export function cartReducer(state: CartState, action: any) {
       draft.summary.total = totalWithDelivery;
     });
   }
+  case ActionTypes.SEND_ORDER:
+    console.log(state.cart);
+    console.log(action.payload.address);
+    console.log(action.payload.payment);
   default:
     return state;
   }

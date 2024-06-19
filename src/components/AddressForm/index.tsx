@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FormCheckoutContainer } from "./styles";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 const addressFormSchema = z.object({
   cep: z.string().min(1, "Insira um CEP válido"),
@@ -16,21 +18,17 @@ const addressFormSchema = z.object({
     .max(2, "Esse campo deve conter no máximo 2 caracteres")
 });
 
-type addressFormData = z.infer<typeof addressFormSchema>;
+export type addressFormData = z.infer<typeof addressFormSchema>;
 
 export function AddressForm() {
+  const { sendCheckoutOrder } = useContext(CartContext);
   const { register, handleSubmit, formState: { errors } } = useForm<addressFormData>({
     resolver: zodResolver(addressFormSchema)
   });
 
-  function handleCheckoutOrder(data: addressFormData) {
-    // eslint-disable-next-line no-console
-    console.log("Dados: ", data);
-  }
-
   return (
     <FormCheckoutContainer>
-      <form onSubmit={handleSubmit(handleCheckoutOrder)}>
+      <form id="address-form" onSubmit={handleSubmit(sendCheckoutOrder)}>
         <div className="fieldset">
           <input
             type="text"

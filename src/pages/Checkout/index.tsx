@@ -37,13 +37,6 @@ export function Checkout() {
     removeProductFromCart(id);
   }
 
-  function sendOrder() {
-    console.log("Enviando o pedido!");
-    console.log("Payment: ", payment);
-    console.log("Cart: ", cart);
-    console.log("Summary: ", summary);
-  }
-
   return (
     <CheckoutContainer>
       {cart.length > 0 ? (
@@ -136,7 +129,7 @@ export function Checkout() {
                   </li>
                 </ul>
 
-                <button type="button" onClick={sendOrder}>
+                <button type="submit" form="address-form">
                   Confirmar pedido
                 </button>
               </CheckoutSummaryContent>

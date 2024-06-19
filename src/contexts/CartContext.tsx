@@ -4,10 +4,12 @@ import { products } from "../json/products";
 import {
   addProductToCartAction,
   removeProductFromCartAction,
+  sendOrderAction,
   sumProductToCartAction,
   updatePriceAction,
   updateProductQuantityAction
 } from "../reducers/cart/actions";
+import { addressFormData } from "../components/AddressForm";
 
 interface CartContextType {
   cart: Product[],
@@ -18,6 +20,7 @@ interface CartContextType {
   updateProductQuantity: (productId: number, quantity: number) => void,
   removeProductFromCart: (id: number) => void,
   selectPaymentMethod: (method: string) => void,
+  sendCheckoutOrder: (address: addressFormData) => void,
 }
 
 interface CartContextProviderProps {
@@ -32,16 +35,18 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     cartReducer, {
       cart: [],
       productList: products,
+      address: null,
       paymentMethod: payment,
       summary: {
         items: 0,
         delivery: 3.5,
         total: 0
-      }
+      },
+      order: null
     }
   );
 
-  const { cart, productList, summary } = cartState;
+  const { cart, productList, summary, order } = cartState;
 
   function addProductToCart(id: number) {
     const filterProducts = productList.find(item => item.id === id);
@@ -68,9 +73,23 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setPayment(method);
   }
 
+  function sendCheckoutOrder(address: addressFormData) {
+    console.log("---- ENVIANDO O PEDIDO! ----");
+    console.log("Endereço de entrega do pedido: ", address);
+    console.log("Payment: ", payment);
+    console.log("Cart: ", cart);
+    console.log("Summary: ", summary);
+    console.log("----------------------------");
+    dispatch(sendOrderAction(address, payment));
+  }
+
   useEffect(() => {
     dispatch(updatePriceAction(cart));
   }, [cart]);
+
+  useEffect(() => {
+    console.log("Pedido: ", order);
+  }, [order]);
 
   return (
     <CartContext.Provider value={{
@@ -81,7 +100,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       addProductToCart,
       updateProductQuantity,
       removeProductFromCart,
-      selectPaymentMethod
+      selectPaymentMethod,
+      sendCheckoutOrder
     }}>
       {children}
     </CartContext.Provider>
