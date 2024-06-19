@@ -20,6 +20,7 @@ export interface CheckoutSummary {
 interface CartState {
   cart: Product[],
   productList: Product[],
+  paymentMethod: string,
   summary: CheckoutSummary
 }
 

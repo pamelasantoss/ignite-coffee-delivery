@@ -19,21 +19,22 @@ import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../../components/QuantityAction";
 import { Link } from "react-router-dom";
 import { AddressForm } from "../../components/AddressForm";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { payments } from "../../json/payments";
 import { PaymentButton } from "../../components/PaymentButton";
 
 export function Checkout() {
-  const { cart, summary, removeProductFromCart } = useContext(CartContext);
-  const [payment, setPayment] = useState("");
+  const {
+    cart,
+    payment,
+    summary,
+    removeProductFromCart,
+    selectPaymentMethod
+  } = useContext(CartContext);
 
   function removeFromCart(id: number) {
     removeProductFromCart(id);
-  }
-
-  function handleSelectionPayment(type: string) {
-    setPayment(type);
   }
 
   function sendOrder() {
@@ -78,7 +79,7 @@ export function Checkout() {
                     name={item.type}
                     icon={item.icon}
                     isPaymentSelected={payment}
-                    onSelectionPayment={handleSelectionPayment}
+                    onSelectionPayment={selectPaymentMethod}
                   />
                 ))}
               </PaymentButtonsSection>
