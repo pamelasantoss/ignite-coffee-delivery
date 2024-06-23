@@ -129,7 +129,11 @@ export function Checkout() {
                   </li>
                 </ul>
 
-                <button type="submit" form="address-form">
+                <button
+                  type="submit"
+                  disabled={payment === "" ? true : false}
+                  form="address-form"
+                >
                   Confirmar pedido
                 </button>
               </CheckoutSummaryContent>

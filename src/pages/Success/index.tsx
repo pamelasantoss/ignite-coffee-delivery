@@ -3,8 +3,12 @@ import { OrderInfoContainer, SuccessContainer, SuccessContentSection } from "./s
 import successImage from "../../assets/success-illustration.svg";
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
 import { IconCircle } from "../../styles/default";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 export function Success() {
+  const { address, payment } = useContext(CartContext);
+
   return (
     <SuccessContainer>
       <h1>Uhu! Pedido confirmado</h1>
@@ -17,8 +21,13 @@ export function Success() {
               <IconCircle bgColor="purple">
                 <MapPin size={20} weight="fill" />
               </IconCircle>
-              <p>Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
-                <br />Farrapos - Porto Alegre, RS</p>
+              <p>Entrega em <strong>{address?.street}, {address?.number}</strong>
+                {address?.complement && (
+                  <>
+                    <br />{address?.complement}
+                  </>
+                )}
+                <br />{address?.neighbour} - {address?.city}, {address?.uf}</p>
             </li>
             <li>
               <IconCircle bgColor="yellow">
@@ -32,7 +41,7 @@ export function Success() {
                 <CurrencyDollar size={20} weight="bold" />
               </IconCircle>
               <p>Pagamento na entrega<br />
-                <strong>Cartão de Crédito</strong></p>
+                <strong>{payment}</strong></p>
             </li>
           </ul>
         </OrderInfoContainer>

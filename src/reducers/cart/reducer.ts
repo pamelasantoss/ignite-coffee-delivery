@@ -18,20 +18,12 @@ export interface CheckoutSummary {
   total: number
 }
 
-export interface FullOrder {
-  items: Product[],
-  address: addressFormData,
-  payment: string,
-  prices: CheckoutSummary
-}
-
 interface CartState {
   cart: Product[],
   productList: Product[],
   address: addressFormData | null,
   paymentMethod: string,
-  summary: CheckoutSummary,
-  order: FullOrder | null
+  summary: CheckoutSummary
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -84,9 +76,10 @@ export function cartReducer(state: CartState, action: any) {
     });
   }
   case ActionTypes.SEND_ORDER:
-    console.log(state.cart);
-    console.log(action.payload.address);
-    console.log(action.payload.payment);
+    return produce(state, (draft) => {
+      draft.address = action.payload.address;
+      draft.paymentMethod = action.payload.payment;
+    });
   default:
     return state;
   }

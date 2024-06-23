@@ -10,10 +10,12 @@ import {
   updateProductQuantityAction
 } from "../reducers/cart/actions";
 import { addressFormData } from "../components/AddressForm";
+import { useNavigate } from "react-router-dom";
 
 interface CartContextType {
   cart: Product[],
   productList: Product[],
+  address: addressFormData | null,
   payment: string,
   summary: CheckoutSummary,
   addProductToCart: (id: number) => void,
@@ -30,6 +32,7 @@ interface CartContextProviderProps {
 export const CartContext = createContext({} as CartContextType);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
+  const navigate = useNavigate();
   const [payment, setPayment] = useState("");
   const [cartState, dispatch] = useReducer(
     cartReducer, {
@@ -41,12 +44,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         items: 0,
         delivery: 3.5,
         total: 0
-      },
-      order: null
+      }
     }
   );
 
-  const { cart, productList, summary, order } = cartState;
+  const { cart, productList, address, summary } = cartState;
 
   function addProductToCart(id: number) {
     const filterProducts = productList.find(item => item.id === id);
@@ -74,27 +76,19 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   function sendCheckoutOrder(address: addressFormData) {
-    console.log("---- ENVIANDO O PEDIDO! ----");
-    console.log("Endereço de entrega do pedido: ", address);
-    console.log("Payment: ", payment);
-    console.log("Cart: ", cart);
-    console.log("Summary: ", summary);
-    console.log("----------------------------");
     dispatch(sendOrderAction(address, payment));
+    navigate("/success");
   }
 
   useEffect(() => {
     dispatch(updatePriceAction(cart));
   }, [cart]);
 
-  useEffect(() => {
-    console.log("Pedido: ", order);
-  }, [order]);
-
   return (
     <CartContext.Provider value={{
       cart,
       productList,
+      address,
       payment,
       summary,
       addProductToCart,

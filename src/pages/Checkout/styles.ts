@@ -249,5 +249,10 @@ export const CheckoutSummaryContent = styled.div`
     &:hover {
       background-color: ${(props) => props.theme["orange-300"]};
     }
+
+    &:disabled {
+      opacity: .8;
+      cursor: not-allowed;
+    }
   }
 `;
