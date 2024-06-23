@@ -1,6 +1,7 @@
 import { produce } from "immer";
 import { ActionTypes } from "./actions";
 import { addressFormData } from "../../components/AddressForm";
+import { products } from "../../json/products";
 
 export interface Product {
   id: number,
@@ -47,8 +48,12 @@ export function cartReducer(state: CartState, action: any) {
         product => product.id === action.payload.productId
       );
       draft.productList[currentProductList].quantity = action.payload.quantity;
-      if (draft.cart[currentProductList]) {
-        draft.cart[currentProductList].quantity = action.payload.quantity;
+      
+      if (draft.cart.length > 0) {
+        const currentCart = draft.cart.findIndex(
+          product => product.id === action.payload.productId
+        );
+        draft.cart[currentCart].quantity = action.payload.quantity;
       }
     });
   case ActionTypes.REMOVE_TO_CART:
@@ -79,6 +84,8 @@ export function cartReducer(state: CartState, action: any) {
     return produce(state, (draft) => {
       draft.address = action.payload.address;
       draft.paymentMethod = action.payload.payment;
+      draft.cart.splice(0);
+      draft.productList = products;
     });
   default:
     return state;

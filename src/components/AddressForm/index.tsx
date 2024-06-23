@@ -16,6 +16,7 @@ const addressFormSchema = z.object({
     .string()
     .min(1,"Insira a sigla do estado que corresponde ao endereço")
     .max(2, "Esse campo deve conter no máximo 2 caracteres")
+    .transform((value) => value.toLocaleUpperCase())
 });
 
 export type addressFormData = z.infer<typeof addressFormSchema>;
