@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FormCheckoutContainer } from "./styles";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
 
 const addressFormSchema = z.object({
@@ -14,18 +14,53 @@ const addressFormSchema = z.object({
   city: z.string().min(1, "Insira a cidade"),
   uf: z
     .string()
-    .min(1,"Insira a sigla do estado que corresponde ao endereço")
+    .min(1, "Insira a sigla do estado que corresponde ao endereço")
     .max(2, "Esse campo deve conter no máximo 2 caracteres")
-    .transform((value) => value.toLocaleUpperCase())
+    .transform((value) => value.toLocaleUpperCase()),
 });
 
 export type addressFormData = z.infer<typeof addressFormSchema>;
 
 export function AddressForm() {
   const { sendCheckoutOrder } = useContext(CartContext);
-  const { register, handleSubmit, formState: { errors } } = useForm<addressFormData>({
-    resolver: zodResolver(addressFormSchema)
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<addressFormData>({
+    resolver: zodResolver(addressFormSchema),
   });
+  const [updateAddress, setUpdateAddress] = useState(null);
+
+  const onSearchAddress = async (value: string) => {
+    try {
+      const fullAddress = await fetch(
+        `https://viacep.com.br/ws/${value}/json/`
+      );
+      const fullAddressResponse = await fullAddress.json();
+      setUpdateAddress(fullAddressResponse);
+    } catch (error) {
+      setUpdateAddress(null);
+      // eslint-disable-next-line no-console
+      console.error(
+        "Desculpe, não conseguimos encontrar seu endereço. Tente novamente mais tarde. ",
+        error
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (updateAddress) {
+      setValue("street", updateAddress.logradouro);
+      setValue("neighbour", updateAddress.bairro);
+      setValue("city", updateAddress.localidade);
+      setValue("uf", updateAddress.uf);
+    } else {
+      reset();
+    }
+  }, [reset, setValue, updateAddress]);
 
   return (
     <FormCheckoutContainer>
@@ -34,9 +69,11 @@ export function AddressForm() {
           <input
             type="text"
             placeholder="CEP"
+            maxLength={8}
             className={`input-cep ${errors.cep ? "error" : ""}`}
             required
             {...register("cep")}
+            onBlur={(e) => onSearchAddress(e.target.value)}
           />
         </div>
 
@@ -59,7 +96,11 @@ export function AddressForm() {
             {...register("number")}
           />
           <div className="fieldset-complemento">
-            <input type="text" placeholder="Complemento" {...register("complement")} />
+            <input
+              type="text"
+              placeholder="Complemento"
+              {...register("complement")}
+            />
             <span>Opcional</span>
           </div>
         </div>
