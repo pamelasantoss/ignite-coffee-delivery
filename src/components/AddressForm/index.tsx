@@ -42,10 +42,16 @@ export function AddressForm() {
     resolver: zodResolver(addressFormSchema),
   });
   const [updateAddress, setUpdateAddress] = useState<AddressData | null>(null);
+  const [isAddressError, setIsAddressError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSearchAddress = async (value: string) => {
+    if (!value) {
+      return;
+    }
+
     try {
+      setIsAddressError(false);
       setIsLoading(true);
       const fullAddress = await fetch(
         `https://viacep.com.br/ws/${value}/json/`
@@ -54,6 +60,7 @@ export function AddressForm() {
       setUpdateAddress(fullAddressResponse);
     } catch (error) {
       setUpdateAddress(null);
+      setIsAddressError(true);
       // eslint-disable-next-line no-console
       console.error(
         "Desculpe, não conseguimos encontrar seu endereço. Tente novamente mais tarde. ",
@@ -85,11 +92,19 @@ export function AddressForm() {
               type="text"
               placeholder="CEP"
               maxLength={8}
-              className={`input-cep ${errors.cep ? "error" : ""}`}
+              className={`input-cep ${
+                errors.cep || isAddressError ? "error" : ""
+              }`}
               required
               {...register("cep")}
               onBlur={(e) => onSearchAddress(e.target.value)}
             />
+            {isAddressError && (
+              <span className="error">
+                Desculpe, não conseguimos encontrar seu endereço. Digite um CEP
+                válido.
+              </span>
+            )}
           </div>
 
           <div className="fieldset">
