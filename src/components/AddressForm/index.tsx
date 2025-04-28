@@ -4,6 +4,7 @@ import { FormCheckoutContainer } from "./styles";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { Loader } from "../Loader";
 
 const addressFormSchema = z.object({
   cep: z.string().min(1, "Insira um CEP válido"),
@@ -21,6 +22,14 @@ const addressFormSchema = z.object({
 
 export type addressFormData = z.infer<typeof addressFormSchema>;
 
+interface AddressData {
+  cep: string;
+  logradouro: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+}
+
 export function AddressForm() {
   const { sendCheckoutOrder } = useContext(CartContext);
   const {
@@ -32,10 +41,12 @@ export function AddressForm() {
   } = useForm<addressFormData>({
     resolver: zodResolver(addressFormSchema),
   });
-  const [updateAddress, setUpdateAddress] = useState(null);
+  const [updateAddress, setUpdateAddress] = useState<AddressData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSearchAddress = async (value: string) => {
     try {
+      setIsLoading(true);
       const fullAddress = await fetch(
         `https://viacep.com.br/ws/${value}/json/`
       );
@@ -48,6 +59,8 @@ export function AddressForm() {
         "Desculpe, não conseguimos encontrar seu endereço. Tente novamente mais tarde. ",
         error
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -63,73 +76,76 @@ export function AddressForm() {
   }, [reset, setValue, updateAddress]);
 
   return (
-    <FormCheckoutContainer>
-      <form id="address-form" onSubmit={handleSubmit(sendCheckoutOrder)}>
-        <div className="fieldset">
-          <input
-            type="text"
-            placeholder="CEP"
-            maxLength={8}
-            className={`input-cep ${errors.cep ? "error" : ""}`}
-            required
-            {...register("cep")}
-            onBlur={(e) => onSearchAddress(e.target.value)}
-          />
-        </div>
-
-        <div className="fieldset">
-          <input
-            type="text"
-            placeholder="Rua"
-            className={errors.street ? "error" : ""}
-            required
-            {...register("street")}
-          />
-        </div>
-
-        <div className="fieldset">
-          <input
-            type="number"
-            placeholder="Número"
-            className={`input-numero ${errors.number ? "error" : ""}`}
-            required
-            {...register("number")}
-          />
-          <div className="fieldset-complemento">
+    <>
+      {isLoading && <Loader />}
+      <FormCheckoutContainer>
+        <form id="address-form" onSubmit={handleSubmit(sendCheckoutOrder)}>
+          <div className="fieldset">
             <input
               type="text"
-              placeholder="Complemento"
-              {...register("complement")}
+              placeholder="CEP"
+              maxLength={8}
+              className={`input-cep ${errors.cep ? "error" : ""}`}
+              required
+              {...register("cep")}
+              onBlur={(e) => onSearchAddress(e.target.value)}
             />
-            <span>Opcional</span>
           </div>
-        </div>
 
-        <div className="fieldset">
-          <input
-            type="text"
-            placeholder="Bairro"
-            className={`input-bairro ${errors.neighbour ? "error" : ""}`}
-            required
-            {...register("neighbour")}
-          />
-          <input
-            type="text"
-            placeholder="Cidade"
-            className={errors.city ? "error" : ""}
-            required
-            {...register("city")}
-          />
-          <input
-            type="text"
-            placeholder="UF"
-            className={`input-uf ${errors.uf ? "error" : ""}`}
-            required
-            maxLength={2}
-            {...register("uf")}
-          />
-        </div>
-      </form>
-    </FormCheckoutContainer>
+          <div className="fieldset">
+            <input
+              type="text"
+              placeholder="Rua"
+              className={errors.street ? "error" : ""}
+              required
+              {...register("street")}
+            />
+          </div>
+
+          <div className="fieldset">
+            <input
+              type="number"
+              placeholder="Número"
+              className={`input-numero ${errors.number ? "error" : ""}`}
+              required
+              {...register("number")}
+            />
+            <div className="fieldset-complemento">
+              <input
+                type="text"
+                placeholder="Complemento"
+                {...register("complement")}
+              />
+              <span>Opcional</span>
+            </div>
+          </div>
+
+          <div className="fieldset">
+            <input
+              type="text"
+              placeholder="Bairro"
+              className={`input-bairro ${errors.neighbour ? "error" : ""}`}
+              required
+              {...register("neighbour")}
+            />
+            <input
+              type="text"
+              placeholder="Cidade"
+              className={errors.city ? "error" : ""}
+              required
+              {...register("city")}
+            />
+            <input
+              type="text"
+              placeholder="UF"
+              className={`input-uf ${errors.uf ? "error" : ""}`}
+              required
+              maxLength={2}
+              {...register("uf")}
+            />
+          </div>
+        </form>
+      </FormCheckoutContainer>
+    </>
   );
 }
