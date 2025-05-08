@@ -10,6 +10,12 @@ export const FormCheckoutContainer = styled.div`
       gap: 0.75rem;
       position: relative;
 
+      span {
+        &.error {
+          color: ${(props) => props.theme.red};
+        }
+      }
+
       input {
         border-radius: 4px;
         border: 1px solid ${(props) => props.theme["gray-400"]};

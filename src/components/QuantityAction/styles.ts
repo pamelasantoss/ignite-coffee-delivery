@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface QuantityContainerProps {
-  componentHeight?: number
+  $componentHeight?: number
 }
 
 export const QuantityContainer = styled.div<QuantityContainerProps>`
@@ -9,7 +9,7 @@ export const QuantityContainer = styled.div<QuantityContainerProps>`
   align-items: center;
   justify-content: space-evenly;
   width: 72px;
-  height: ${(props) => props.componentHeight}px;
+  height: ${(props) => props.$componentHeight}px;
   padding: 0.5rem;
   background-color: ${(props) => props.theme["gray-400"]};
   border-radius: 6px;

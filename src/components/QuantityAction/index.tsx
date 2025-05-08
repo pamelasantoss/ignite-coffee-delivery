@@ -48,7 +48,7 @@ export function QuantityAction(
   }
 
   return (
-    <QuantityContainer componentHeight={componentHeight}>
+    <QuantityContainer $componentHeight={componentHeight}>
       <button
         type="button"
         onClick={handleRemoveItem}

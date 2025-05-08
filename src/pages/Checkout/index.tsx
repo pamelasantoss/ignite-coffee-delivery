@@ -45,7 +45,7 @@ export function Checkout() {
             <h2>Complete seu pedido</h2>
 
             <CheckoutInfoContainer>
-              <CheckoutTitleSection iconColor="orange">
+              <CheckoutTitleSection $iconcolor="orange">
                 <MapPinLine size={20} />
                 <p>
                   <span>Endereço de entrega</span>
@@ -57,7 +57,7 @@ export function Checkout() {
             </CheckoutInfoContainer>
 
             <CheckoutInfoContainer>
-              <CheckoutTitleSection iconColor="purple">
+              <CheckoutTitleSection $iconcolor="purple">
                 <CurrencyDollar size={20} />
                 <p>
                   <span>Pagamento</span>

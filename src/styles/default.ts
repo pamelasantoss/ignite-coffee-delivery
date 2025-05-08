@@ -34,7 +34,7 @@ const BG_ICON_COLOR = {
 } as const;
 
 interface IconCircleProps {
-  bgColor: keyof typeof BG_ICON_COLOR
+  $bgcolor: keyof typeof BG_ICON_COLOR
 }
 
 export const IconCircle = styled.div<IconCircleProps>`
@@ -44,7 +44,7 @@ export const IconCircle = styled.div<IconCircleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) => props.theme[BG_ICON_COLOR[props.bgColor]]};
+  background: ${(props) => props.theme[BG_ICON_COLOR[props.$bgcolor]]};
 
   svg {
     fill: ${(props) => props.theme.white};
