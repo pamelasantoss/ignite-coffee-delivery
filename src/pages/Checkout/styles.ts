@@ -106,7 +106,7 @@ const ICON_COLOR = {
 } as const;
 
 interface CheckoutTitleSectionProps {
-  iconColor: keyof typeof ICON_COLOR
+  $iconcolor: keyof typeof ICON_COLOR
 }
 
 export const CheckoutTitleSection = styled.div<CheckoutTitleSectionProps>`
@@ -114,7 +114,7 @@ export const CheckoutTitleSection = styled.div<CheckoutTitleSectionProps>`
   gap: 0.5rem;
 
   svg {
-    fill: ${(props) => props.theme[ICON_COLOR[props.iconColor]]};
+    fill: ${(props) => props.theme[ICON_COLOR[props.$iconcolor]]};
   }
 
   p {

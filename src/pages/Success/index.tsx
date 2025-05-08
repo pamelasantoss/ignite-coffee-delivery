@@ -18,7 +18,7 @@ export function Success() {
         <OrderInfoContainer>
           <ul>
             <li>
-              <IconCircle bgColor="purple">
+              <IconCircle $bgcolor="purple">
                 <MapPin size={20} weight="fill" />
               </IconCircle>
               <p>Entrega em <strong>{address?.street}, {address?.number}</strong>
@@ -30,14 +30,14 @@ export function Success() {
                 <br />{address?.neighbour} - {address?.city}, {address?.uf}</p>
             </li>
             <li>
-              <IconCircle bgColor="yellow">
+              <IconCircle $bgcolor="yellow">
                 <Timer size={20} weight="fill" />
               </IconCircle>
               <p>Previsão de entrega<br />
                 <strong>20 min - 30 min</strong></p>
             </li>
             <li>
-              <IconCircle bgColor="orange">
+              <IconCircle $bgcolor="orange">
                 <CurrencyDollar size={20} weight="bold" />
               </IconCircle>
               <p>Pagamento na entrega<br />
