@@ -11,15 +11,19 @@ import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { useLocation } from "../../contexts/LocationContext";
 
 export function Header() {
   const { cart } = useContext(CartContext);
+  const { location } = useLocation();
 
   const navigate = useNavigate();
 
   function handleCheckoutButton() {
     navigate("/checkout");
   }
+
+  console.log("location: ", location);
 
   return (
     <HeaderContainer>
