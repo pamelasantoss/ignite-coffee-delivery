@@ -17,14 +17,14 @@
     "polished": "^4.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.56.1",
+    "react-hook-form": "^7.56.3",
     "react-router-dom": "^6.30.0",
-    "styled-components": "^6.1.17",
-    "zod": "^3.24.3"
+    "styled-components": "^6.1.18",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
-    "@types/react": "^18.3.20",
-    "@types/react-dom": "^18.3.6",
+    "@types/react": "^18.3.21",
+    "@types/react-dom": "^18.3.7",
     "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
@@ -33,6 +33,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "typescript": "^5.8.3",
-    "vite": "^6.3.3"
+    "vite": "^6.3.5"
   }
 }
