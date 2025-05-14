@@ -15,6 +15,7 @@ This application was a part of a Rocketseat course for practice the React Hooks 
 - [ReactJS](https://react.dev/learn)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components](https://styled-components.com/)
+- [React Hot Toast](https://react-hot-toast.com/)
 - [React Hook Form](https://react-hook-form.com/)
 - [Zod](https://zod.dev/)
 - [Google Fonts](https://fonts.google.com/)

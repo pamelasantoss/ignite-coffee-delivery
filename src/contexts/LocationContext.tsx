@@ -25,10 +25,13 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
 
   async function handleLocation(position: any) {
     setIsLoading(true);
+    setLocationError("");
 
     try {
       const { latitude, longitude } = position.coords;
-      const getLocation = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+      const getLocation = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      );
       const locationResponse = await getLocation.json();
 
       setLocation({
@@ -36,9 +39,9 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
         state: locationResponse.address.state
       });
     } catch(error) {
-      setLocationError("Desculpe, não conseguimos encontrar seu endereço. Tente novamente mais tarde.");
+      setLocationError("Desculpe, não conseguimos encontrar sua localização. Tente novamente mais tarde.");
       console.error(
-        "Desculpe, não conseguimos encontrar seu endereço. Tente novamente mais tarde. ",
+        "Desculpe, não conseguimos encontrar sua localização. Tente novamente mais tarde. ",
         error
       );
     } finally {
@@ -51,11 +54,10 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
       setIsLocationLoaded(true);
       navigator.geolocation.getCurrentPosition(handleLocation, () => {
         setIsLocationLoaded(false);
-        setLocationError("Desculpe, não conseguimos encontrar sua localização.");
+        setLocationError(
+          "Desculpe, não conseguimos encontrar sua localização. Verifique as configurações do seu navegador."
+        );
       });
-    } else {
-      setLocationError("Desculpe, Geolocalização não suportada pelo navegador.");
-      console.error("Geolocalização não suportada pelo navegador.");
     }
   }, [isLocationLoaded]);
 
