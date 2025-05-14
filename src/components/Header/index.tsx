@@ -3,7 +3,8 @@ import {
   ActionButtonsContainer,
   CartButton,
   HeaderContainer,
-  LocationButton
+  LocationButton,
+  SpinningIcon
 } from "./styles";
 
 import coffeeDeliveryLogo from "../../assets/coffee-delivery-logo.svg";
@@ -15,7 +16,7 @@ import { useLocation } from "../../contexts/LocationContext";
 
 export function Header() {
   const { cart } = useContext(CartContext);
-  const { location } = useLocation();
+  const { location, isLoading, locationError } = useLocation();
 
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ export function Header() {
     navigate("/checkout");
   }
 
-  console.log("location: ", location);
+  console.log("locationError: ", locationError);
 
   return (
     <HeaderContainer>
@@ -35,8 +36,12 @@ export function Header() {
 
           <ActionButtonsContainer>
             <LocationButton>
-              <MapPin size={20} weight="fill" />
-              Porto Alegre, RS
+              {isLoading || !location ? <SpinningIcon size={20} /> : (
+                <>
+                  <MapPin size={20} weight="fill" />
+                  {location.city}, {location.state}
+                </>
+              )}              
             </LocationButton>
             
             <CartButton type="button" onClick={handleCheckoutButton}>

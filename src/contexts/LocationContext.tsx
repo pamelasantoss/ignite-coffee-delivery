@@ -7,6 +7,8 @@ interface LocationData {
 
 interface LocationContextType {
   location: LocationData | null
+  isLoading: boolean
+  locationError: string
 }
 
 interface LocationContextProviderProps {
@@ -20,8 +22,6 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
   const [isLocationLoaded, setIsLocationLoaded] = useState(false);
   const [locationError, setLocationError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  // https://nominatim.org/release-docs/develop/api/Reverse/
 
   async function handleLocation(position: any) {
     setIsLoading(true);
@@ -51,15 +51,16 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
       setIsLocationLoaded(true);
       navigator.geolocation.getCurrentPosition(handleLocation, () => {
         setIsLocationLoaded(false);
-        setLocationError("Desculpa, não conseguimos encontrar sua localização!");
+        setLocationError("Desculpe, não conseguimos encontrar sua localização.");
       });
     } else {
-      console.log("Geolocalização não suportada no navegador!");
+      setLocationError("Desculpe, Geolocalização não suportada pelo navegador.");
+      console.error("Geolocalização não suportada pelo navegador.");
     }
   }, [isLocationLoaded]);
 
   return (
-    <LocationContext.Provider value={{ location }}>
+    <LocationContext.Provider value={{ location, isLoading, locationError }}>
       {children}
     </LocationContext.Provider>
   );

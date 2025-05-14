@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { BaseButton } from "../../styles/default";
+import { Spinner } from "@phosphor-icons/react";
 
 export const HeaderContainer = styled.header`
   padding: 2rem 0;
@@ -28,6 +29,16 @@ export const LocationButton = styled(BaseButton)`
   color: ${(props) => props.theme["purple-700"]};
   font-size: 0.875rem;
   gap: 0.25rem;
+`;
+
+const spin = keyframes`
+  to {
+    transform: rotate(360deg)
+  }
+`;
+
+export const SpinningIcon = styled(Spinner)`
+  animation: ${spin} 1s linear infinite
 `;
 
 export const CartButton = styled(BaseButton)`
