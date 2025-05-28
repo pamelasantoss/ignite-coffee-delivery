@@ -2,7 +2,7 @@ import { Bank, CreditCard, Money } from "@phosphor-icons/react";
 import { Payment } from "./styles";
 
 type PaymentButtonProps = {
-  name: string,
+  name: "Cartão de crédito" | "Cartão de débito" | "Dinheiro",
   icon: string,
   isPaymentSelected: string,
   onSelectionPayment: (type: string) => void

@@ -23,7 +23,7 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
   const [locationError, setLocationError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleLocation(position: any) {
+  async function handleLocation(position: GeolocationPosition) {
     setIsLoading(true);
     setLocationError("");
 
