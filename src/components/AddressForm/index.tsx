@@ -57,6 +57,9 @@ export function AddressForm() {
         `https://viacep.com.br/ws/${value}/json/`
       );
       const fullAddressResponse = await fullAddress.json();
+      if (fullAddressResponse.erro) {
+        setIsAddressError(true);
+      }
       setUpdateAddress(fullAddressResponse);
     } catch (error) {
       setUpdateAddress(null);
