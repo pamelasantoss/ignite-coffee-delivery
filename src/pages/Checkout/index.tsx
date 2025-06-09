@@ -1,8 +1,4 @@
-import {
-  CurrencyDollar,
-  MapPinLine,
-  Trash
-} from "@phosphor-icons/react";
+import { CurrencyDollar, MapPinLine, Trash } from "@phosphor-icons/react";
 import {
   CheckoutContainer,
   CheckoutEmptyContainer,
@@ -13,7 +9,7 @@ import {
   CheckoutSummaryContent,
   CheckoutTitleSection,
   PaymentButtonsSection,
-  RemoveProductButton
+  RemoveProductButton,
 } from "./styles";
 import { formatReal } from "../../helpers/formatReal";
 import { QuantityAction } from "../../components/QuantityAction";
@@ -25,13 +21,8 @@ import { payments } from "../../json/payments";
 import { PaymentButton } from "../../components/PaymentButton";
 
 export function Checkout() {
-  const {
-    cart,
-    payment,
-    summary,
-    removeProductFromCart,
-    selectPaymentMethod
-  } = useContext(CartContext);
+  const { cart, payment, summary, removeProductFromCart, selectPaymentMethod } =
+    useContext(CartContext);
 
   function removeFromCart(id: number) {
     removeProductFromCart(id);
@@ -60,8 +51,8 @@ export function Checkout() {
               <CheckoutTitleSection $iconcolor="purple">
                 <CurrencyDollar size={20} />
                 <p>
-                  <span>Pagamento</span>
-                  O pagamento é feito na entrega. Escolha a forma que deseja pagar
+                  <span>Pagamento</span>O pagamento é feito na entrega. Escolha
+                  a forma que deseja pagar
                 </p>
               </CheckoutTitleSection>
 
@@ -107,7 +98,10 @@ export function Checkout() {
                       </div>
                     </div>
                     <div className="price">
-                      <p><span>R$</span>{formatReal(item.price)}</p>
+                      <p>
+                        <span>R$</span>
+                        {formatReal(item.price)}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -144,9 +138,11 @@ export function Checkout() {
         <CheckoutEmptyContainer>
           <h1>Seu carrinho está vazio</h1>
           <p>Adicione produtos no seu carrinho para seguir com a compra</p>
-          <Link to="/" title="Home" role="button">Continuar comprando</Link>
+          <Link to="/" title="Home" role="button">
+            Continuar comprando
+          </Link>
         </CheckoutEmptyContainer>
       )}
     </CheckoutContainer>
   );
-} 
+}
