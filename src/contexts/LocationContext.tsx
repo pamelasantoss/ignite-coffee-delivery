@@ -1,23 +1,31 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface LocationData {
-  city: string
-  state: string
+  city: string;
+  state: string;
 }
 
 interface LocationContextType {
-  location: LocationData | null
-  isLoading: boolean
-  locationError: string
+  location: LocationData | null;
+  isLoading: boolean;
+  locationError: string;
 }
 
 interface LocationContextProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const LocationContext = createContext({} as LocationContextType);
 
-export function LocationContextProvider({ children }: LocationContextProviderProps) {
+export function LocationContextProvider({
+  children,
+}: LocationContextProviderProps) {
   const [location, setLocation] = useState<LocationData | null>(null);
   const [isLocationLoaded, setIsLocationLoaded] = useState(false);
   const [locationError, setLocationError] = useState("");
@@ -30,17 +38,21 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
     try {
       const { latitude, longitude } = position.coords;
       const getLocation = await fetch(
+        // eslint-disable-next-line max-len
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
       );
       const locationResponse = await getLocation.json();
 
       setLocation({
         city: locationResponse.address.city,
-        state: locationResponse.address.state
+        state: locationResponse.address.state,
       });
-    } catch(error) {
-      setLocationError("Desculpe, não conseguimos encontrar sua localização. Tente novamente mais tarde.");
+    } catch (error) {
+      setLocationError(
+        "Desculpe, não conseguimos encontrar sua localização. Tente novamente mais tarde."
+      );
       console.error(
+        // eslint-disable-next-line max-len
         "Desculpe, não conseguimos encontrar sua localização. Tente novamente mais tarde. ",
         error
       );
@@ -55,6 +67,7 @@ export function LocationContextProvider({ children }: LocationContextProviderPro
       navigator.geolocation.getCurrentPosition(handleLocation, () => {
         setIsLocationLoaded(false);
         setLocationError(
+          // eslint-disable-next-line max-len
           "Desculpe, não conseguimos encontrar sua localização. Verifique as configurações do seu navegador."
         );
       });

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface QuantityContainerProps {
-  $componentHeight?: number
+  $componentHeight?: number;
 }
 
 export const QuantityContainer = styled.div<QuantityContainerProps>`
@@ -46,9 +46,7 @@ export const QuantityContainer = styled.div<QuantityContainerProps>`
     font-size: 1rem;
     color: ${(props) => props.theme["brown-900"]};
 
-    [type="number"] {
-      -moz-appearance: textfield;
-    }
+    -moz-appearance: textfield;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
